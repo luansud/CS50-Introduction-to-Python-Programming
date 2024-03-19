@@ -1,7 +1,3 @@
-from calculator import grade_calculator
-from feedback import user_answer_verification
-from question import make_question
-
 def main():
     print("This Quiz will test your Knowledge about Python!\n")
     print("Now you have the opportunity to verify if you understood the subject!\n")
@@ -35,6 +31,50 @@ def main():
         if is_correct:
             grade += 1
     grade_calculator(user_input_response, test_questions_options)
+    
+    
+def user_answer_verification(is_correct, user_answer, correct_answer):
+    if is_correct:
+        print("----------- Correct answer! -----------")
+        return True
+    else:
+        print("----------- Incorrect answer! -----------")
+        return False
+    
+def grade_calculator(user_input_response, test_questions_options):
+    grade = 0
+    for user_answer, i in zip(user_input_response, test_questions_options):
+        if user_answer == i["correct_answer"]:
+            grade += 1
+
+    total_problems = len(test_questions_options)
+    grade_in_percent = (grade / total_problems) * 100
+    print(f"You got {grade} of {total_problems} questions")
+    if grade_in_percent == 100:
+        print("Congratulations, you got a perfect grade!")
+    elif grade_in_percent < 99 and grade_in_percent >= 80:
+        print("Well Done, You did a great job!")
+    elif grade_in_percent < 79 and grade_in_percent >= 60:
+        print("Good, but i know that you can do better!")
+    else:
+        print("Keep trying!")
+        
+    return grade_in_percent
+    
+def make_question(problem, alternatives_answers, user=input):
+    print(problem)
+
+    for option in alternatives_answers:
+        print(option)
+
+    user_input_response = user("Your answer: ", )
+
+    acceptable_options = [option[0].lower() for option in alternatives_answers]
+    if user_input_response.lower() not in acceptable_options:
+        raise ValueError("You Should Type the letters: 'a, b, c, or d'")
+
+    return user_input_response.lower()
+    
     
 if __name__ == "__main__":
     main()

@@ -1,7 +1,5 @@
 import pytest
-from calculator import grade_calculator
-from feedback import user_answer_verification
-from question import make_question
+from project import grade_calculator,user_answer_verification,make_question
 
 def test_make_question():
     question = {"problem": "Which method can be used to return a string in upper case letters?", "alternatives": ["a) upper()", "b) uppercase()", "c) toUpperCase()", "d) upperCase()"], "correct_answer": "a"}
